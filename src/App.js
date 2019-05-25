@@ -1,26 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Toolbar from './Components/Toolbar/Toolbar';
+import SideDrawer from './Components/SideDrawer/SideDrawer';
+import Backdrop from './Components/Backdrop/Backdrop';
+import RouteNav from './Components/Routes/Route';
+import { Container } from 'semantic-ui-react';
+
+class App extends React.Component {
+	state = {
+		sideDrawerOpen: false
+	};
+
+	drawerToggleClickHandler = () => {
+		this.setState(prevState => {
+			return { sideDrawerOpen: !prevState.sideDrawerOpen };
+		});
+	};
+
+	backdropClickHandle = () => {
+		this.setState({ sideDrawerOpen: false });
+	};
+
+	render() {
+		return (
+			<div style={{ height: '100%' }}>
+				<Toolbar drawerClickHandler={this.drawerToggleClickHandler} />
+				<SideDrawer
+					show={this.state.sideDrawerOpen}
+					click={this.backdropClickHandle}
+				/>
+				{this.state.sideDrawerOpen && (
+					<Backdrop click={this.backdropClickHandle} />
+				)}
+				<Container>
+					<RouteNav />
+				</Container>
+			</div>
+		);
+	}
 }
 
 export default App;
