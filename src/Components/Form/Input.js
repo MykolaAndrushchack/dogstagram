@@ -9,7 +9,7 @@ const InputForm = props => {
 				name={props.name}
 				id={props.name}
 				placeholder={`Enter your ${props.name}`}
-				value={props.data}
+				value={props.data.name}
 				onChange={props.onChange}
 			/>
 		</>

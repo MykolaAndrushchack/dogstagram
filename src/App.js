@@ -24,6 +24,7 @@ class App extends React.Component {
 	render() {
 		return (
 			<div style={{ height: '100%' }}>
+				
 				<Toolbar drawerClickHandler={this.drawerToggleClickHandler} />
 				<SideDrawer
 					show={this.state.sideDrawerOpen}

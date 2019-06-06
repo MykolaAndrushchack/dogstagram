@@ -16,11 +16,6 @@ const CartComponent = ({
 				<Card.Meta>Sex: {sex}</Card.Meta>
 				<Card.Description>Status: {status}</Card.Description>
 			</Card.Content>
-			<Card.Content extra style={{ display: 'flex', justifyContent: 'center' }}>
-				<Button basic color={buttonDelete ? 'red' : 'green'}>
-					{button}
-				</Button>
-			</Card.Content>
 		</Card>
 	);
 };
