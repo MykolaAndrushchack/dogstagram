@@ -22,8 +22,8 @@ const SignUpPage = props => {
 			{client => (
 				<Mutation
 					mutation={SIGNUP}
-					onCompleted={({ signUp: { token, expiresAt } }) => {
-						client.writeData({ data: { isLoggedIn: true, expiresAt } });
+					onCompleted={({ signUp: { token } }) => {
+						client.writeData({ data: { isLoggedIn: true } });
 						localStorage.setItem('token', token);
 						props.history.push('/dogs');
 					}}
@@ -39,7 +39,7 @@ const SignUpPage = props => {
 									link='/login'
 									loading={loading}
 									error={error}
-									submit={({ name, password, ...rest }) => {
+									submit={({ name, password }) => {
 										signUp({ variables: { username: name, password } });
 									}}
 								/>

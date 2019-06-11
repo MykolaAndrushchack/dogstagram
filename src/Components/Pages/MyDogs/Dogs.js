@@ -30,34 +30,43 @@ const CREATEDOG = gql`
 	}
 `;
 
-class DogsControll extends React.Component {
-	render() {
-		return (
-			<>
-				<Mutation mutation={CREATEDOG}>
-					{(createDog, { data, loading, error }) => {
-						if (loading) return <Loader />;
-						if (error) return `Error! ${error.message}`;
-						return (
-							<>
-								<FormDog
-									title='Create Dog'
-									button='Create'
-									submit={({ dogname, breed, dob, sex, status }) => {
-										createDog({
-											variables: { name: dogname, breed, dob, sex, status }
-										});
-
-										this.props.history.push('/my-dogs');
-									}}
-								/>
-							</>
-						);
-					}}
-				</Mutation>
-			</>
-		);
-	}
-}
+const DogsControll = props => {
+	return (
+		<>
+			<Mutation
+				mutation={CREATEDOG}
+				onCompleted={({ createDog: { name, sex, breed } }) => {
+					console.log('created datas: -> ', name, sex, breed);
+					props.history.push('/my-dogs');
+				}}
+			>
+				{(createDog, { data, loading, error }) => {
+					if (loading) return <Loader />;
+					if (error) return `Error! ${error.message}`;
+					return (
+						<>
+							<FormDog
+								title='Create Dog'
+								button='Create'
+								submit={({ dogname, breed, dob, sex, status }) => {
+									console.log('submited datas', dogname, breed, sex);
+									createDog({
+										variables: {
+											name: dogname,
+											breed,
+											dob,
+											sex,
+											status
+										}
+									});
+								}}
+							/>
+						</>
+					);
+				}}
+			</Mutation>
+		</>
+	);
+};
 
 export default DogsControll;
