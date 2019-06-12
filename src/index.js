@@ -11,11 +11,9 @@ import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ApolloProvider } from 'react-apollo';
-import { onError } from 'apollo-link-error';
 import { from } from 'apollo-link';
 
 import { resolvers, typeDefs } from './resolvers';
-import Logout from './Components/Logout/Logout';
 
 const httpLink = createHttpLink({
 	uri: 'http://localhost:4000/graphql'
@@ -32,11 +30,6 @@ const authLink = setContext((_, { headers }) => {
 		}
 	};
 });
-
-// const logoutLink = onError(({ networkError }) => {
-// 	console.log(networkError);
-// 	if (networkError.statusCode === 401) Logout();
-// });
 
 const cache = new InMemoryCache();
 

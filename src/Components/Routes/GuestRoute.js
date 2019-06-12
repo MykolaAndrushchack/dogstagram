@@ -2,8 +2,6 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Query, ApolloConsumer } from 'react-apollo';
 
-import { GET_ME } from '../../utils/QueriesGQL';
-
 import gql from 'graphql-tag';
 
 const IS_LOGGED_IN = gql`
